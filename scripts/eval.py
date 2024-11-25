@@ -16,9 +16,14 @@ def main():
 if __name__ == "__main__":
     config=configparser.ConfigParser()
     config.read('./config.txt')
-    cmpt_t=config.get('DEFAULT','cmpt_t')
-    reset_t=config.get('DEFAULT','reset_t')
-    trans_t=config.get('DEFAULT','trans_t')
+    cmpt_tt=config.get('DEFAULT','cmpt_t')
+    reset_tt=config.get('DEFAULT','reset_t')
+    trans_tt=config.get('DEFAULT','trans_t')
+
+
+    cmpt_t=float(cmpt_tt)
+    reset_t=float(reset_tt)
+    trans_t=float(trans_tt)
 
     if len(sys.argv) !=3:
         print("Usage error")
