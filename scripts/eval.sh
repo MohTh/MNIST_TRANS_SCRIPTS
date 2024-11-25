@@ -17,10 +17,13 @@ parent_directory=$(readlink -f "$parent_directory_relative")
         cd "$parent_directory" && spectre -64 ++aps +mt=32 netlist +log ./psf/spectre.out -format psfascii -raw ./psf
         #cd "$parent_directory" && /eda/cadence/2019-20/RHELx86/SPECTRE_19.10.063/bin/spectre -64 ++aps +mt=32 netlist +log ./psf/spectre.out -format psfascii -raw ./psf
         
-        #rm -rf ./netlist.ahdlSimDB
+        
+        python3 ../scripts/extract.py
+        rm -rf ./netlist.ahdlSimDB
+
         #psf -i ./psf/tran.tran.tran -o ../out/tran.psfascii
 
-	#    rm -rf ./psf
+	    rm -rf ./psf
 	    cd ..
         printf "\033[0K\r"
     	
