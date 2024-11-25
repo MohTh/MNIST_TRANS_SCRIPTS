@@ -48,7 +48,7 @@ if __name__ == "__main__":
         for i in range(10):
               
             temp_out=[]
-            for jj in range(sys.argv[1]):
+            for jj in range(sys.argv[2]):
                 for j in range(len(time_array)):
                         
                         if time_array[j]==(cmpt_t + reset_t +trans_t)*i + reset_t+cmpt_t:
