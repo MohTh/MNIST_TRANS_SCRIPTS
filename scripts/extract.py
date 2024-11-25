@@ -3,8 +3,8 @@ from collections import defaultdict
 import csv
 
 # File path
-file_path = "./data_m0.2_M1.2_V0.6/psf/tran.tran.tran"
-output_file_path = "./data_m0.2_M1.2_V0.6/psf/tran.csv"
+file_path = "./psf/tran.tran.tran"
+output_file_path = "./tran.csv"
 
 # Data storage
 time_values = []
