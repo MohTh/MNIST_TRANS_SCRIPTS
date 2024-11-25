@@ -81,7 +81,7 @@ def gen_inputs(out_path, in_path,number_images, number_inputs, cmpt_t, reset_t,t
 
     with open(f"{out_path}/CLR.txt", "w") as file:
         for j in range(5*number_images):
-            file.write(f"{times[j]} {CLR_s[j]}\n")
+            file.write(f"{times_rst[j]} {CLR_s[j]}\n")
 
 
 
