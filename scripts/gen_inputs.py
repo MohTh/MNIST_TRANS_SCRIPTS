@@ -65,7 +65,7 @@ def gen_inputs(out_path, in_path,number_images, number_inputs, cmpt_t, reset_t,t
             times_rst[5*i+1] = (cmpt_t + reset_t+trans_t)*i + trans_t
             times_rst[5*i+2] = (cmpt_t + reset_t+trans_t)*i + reset_t - trans_t
             times_rst[5*i+3] = (cmpt_t + reset_t+trans_t)*i + reset_t
-            times_rst[5*i+4] = (cmpt_t + reset_t+trans_t)*i + reset_t+cmpt_t+reset_t-trans_t/20
+            times_rst[5*i+4] = (cmpt_t + reset_t+trans_t)*i + reset_t+cmpt_t+trans_t-trans_t/20
 
 
 
