@@ -65,6 +65,7 @@ if __name__ == "__main__":
 
         # New value for stop
         new_stop_value = f"{((cmpt_t + reset_t+trans_t)*int(sys.argv[2]))}"
+        print(new_stop_value)
 
         # Read the file
         with open(file_path, "r") as file:
