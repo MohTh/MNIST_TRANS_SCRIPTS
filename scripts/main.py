@@ -64,9 +64,7 @@ if __name__ == "__main__":
         file_path = f"{sys.argv[1]}/netlist"
 
         # New value for stop
-        new_stop_value = f"{((cmpt_t + reset_t+trans_t)*int(sys.argv[2]))}"
-        print(new_stop_value)
-
+        new_stop_value = f"{((float(cmpt_t) + float(reset_t)+float(trans_t))*int(sys.argv[2]))}"
         # Read the file
         with open(file_path, "r") as file:
             lines = file.readlines()
