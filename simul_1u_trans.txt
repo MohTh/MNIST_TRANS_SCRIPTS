@@ -3,7 +3,7 @@ simulatorOptions options psfversion="1.4.0" reltol=1e-3 vabstol=1e-6 \
     maxnotes=5 maxwarns=5 digits=5 cols=80 pivrel=1e-3 \
     sensfile="../psf/sens.output" checklimitdest=psf 
 tran tran stop=1u write="spectre.ic" writefinal="spectre.fc" \
-    annotate=status maxiters=5 
+    annotate=status maxiters=5  save=none currents=selected
 finalTimeOP info what=oppoint where=rawfile
 modelParameter info what=models where=rawfile
 element info what=inst where=rawfile
@@ -14,4 +14,4 @@ subckts info what=subckts where=rawfile
 save I0:11032 I0:11033 I0:11034 I0:11035 I0:11036 I0:11037 I0:11038 \
     I0:11039 I0:11040 I0:11041 I0:11022 I0:11023 I0:11024 I0:11025 \
     I0:11026 I0:11027 I0:11028 I0:11029 I0:11030 I0:11031 
-saveOptions options save=allpub
+saveOptions options save=none
