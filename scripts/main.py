@@ -73,9 +73,17 @@ if __name__ == "__main__":
         # Modify the stop value
         with open(file_path, "w") as file:
             for line in lines:
-                # Replace the value of stop using regex
-                updated_line = re.sub(r"(stop=)(\S+)", r"\1" + new_stop_value, line)
-                file.write(updated_line)
+                if "stop=" in line:
+                    # Split the line and replace the stop value
+                    parts = line.split(" ")
+                    for i, part in enumerate(parts):
+                        if part.startswith("stop="):
+                            parts[i] = f"stop={new_stop_value}"
+                            break
+                    # Join the line back together
+                    line = " ".join(parts)
+                
+                file.write(line)
 
         print(f"The value of 'stop' has been updated to {new_stop_value}.")
         
