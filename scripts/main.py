@@ -20,6 +20,7 @@ import model_gen_vectors
 import gen_images
 import gen_netlist
 import configparser
+import re
 import gen_inputs
 #USAGE: python main.py <output_folder_path> <number_of_images>  <t/nt> <input netlist path>
 
@@ -58,5 +59,24 @@ if __name__ == "__main__":
         gen_images.gen_images(sys.argv[1],int(sys.argv[2]))
         gen_inputs.gen_inputs("./stimul",sys.argv[1], int(sys.argv[2]),1000,float(cmpt_t),float(reset_t),float(trans_t))
         gen_netlist.gen_netlist(sys.argv[1],int(sys.argv[2]),sys.argv[4])
+
+        # Path to your text file
+        file_path = f"{sys.argv[1]}/netlist"
+
+        # New value for stop
+        new_stop_value = f"{((cmpt_t + reset_t+trans_t)*int(sys.argv[2]))}"
+
+        # Read the file
+        with open(file_path, "r") as file:
+            lines = file.readlines()
+
+        # Modify the stop value
+        with open(file_path, "w") as file:
+            for line in lines:
+                # Replace the value of stop using regex
+                updated_line = re.sub(r"(stop=)(\S+)", r"\1" + new_stop_value, line)
+                file.write(updated_line)
+
+        print(f"The value of 'stop' has been updated to {new_stop_value}.")
         
 
