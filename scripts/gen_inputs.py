@@ -71,7 +71,10 @@ def gen_inputs(out_path, in_path,number_images, number_inputs, cmpt_t, reset_t,t
 
 
     #generate a file for each input
+    if not os.path.exists(out_path):
+        os.makedirs(out_path)
     for i in range(number_inputs):
+        
         with open(f"{out_path}/input_{i}.txt", "w") as file:
             for j in range(5*number_images):
                 file.write(f"{times[j]} {levels[j][i]}\n")
