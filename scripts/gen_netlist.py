@@ -1,7 +1,8 @@
 import shutil
+import os
 def gen_netlist(path, number , input_netlist):
-
-    stim_path = "/xusers/1_profils/linux/moboucha/These/Tests/Single_mos/MNIST_TRANS/First/Stimul/"
+    current_path = os.getcwd()
+    stim_path = current_path + "/stimul/"
     # Read values from file and assign to an array
     VBN = []
     VBP = []
