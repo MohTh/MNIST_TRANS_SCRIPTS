@@ -56,11 +56,11 @@ if __name__ == "__main__":
             for jj in range(int(sys.argv[2])):
                 for j in range(len(time_array)):
                         
-                        if time_array[j]==(cmpt_t + reset_t +trans_t)*jj + reset_t+cmpt_t:
+                        if time_array[j]==(cmpt_t + reset_t +trans_t)*jj + reset_t+cmpt_t-trans_t:
                             temp_out.append(Out[i][j])
                             print(f"Time: {time_array[j]}")
                         elif j!=0:
-                            if time_array[j-1]<(cmpt_t + reset_t +trans_t)*jj + reset_t+cmpt_t and time_array[j]>(cmpt_t + reset_t +trans_t)*jj + reset_t+cmpt_t:
+                            if time_array[j-1]<(cmpt_t + reset_t +trans_t)*jj + reset_t+cmpt_t-trans_t and time_array[j]>(cmpt_t + reset_t +trans_t)*jj + reset_t+cmpt_t-trans_t:
                                     temp_out.append(Out[i][j-1])
                                     print(f"Time: {time_array[j]}")
             
