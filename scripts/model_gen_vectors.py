@@ -166,9 +166,9 @@ def model_gen_vectors():
             #     f.write(f"{Vmax}\n")
             # else :
             #     # f.write("%s\n"% do[i])
-            f.write(f"{Vmax}\n")
+            f.write(f"{Vmid}\n")
             for l in range(215):
-                f.write(f"{Vmax}\n")
+                f.write(f"{Vmid}\n")
             j=0
             while (j<784):
                 f.write("%s\n" % INBP[i][j])
@@ -180,9 +180,9 @@ def model_gen_vectors():
             #     # f.write("%s\n" % do[i])
             #     f.write(f"{Vmax}\n")
             # else :
-            f.write(f"{Vmax}\n")
+            f.write(f"{Vmid}\n")
             for l in range(215):
-                f.write(f"{Vmax}\n")
+                f.write(f"{Vmid}\n")
             j=0
             while (j<784):
                 f.write("%s\n" % INBN[i][j])
