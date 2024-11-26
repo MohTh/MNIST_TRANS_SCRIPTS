@@ -29,7 +29,7 @@ for time in times:
     os.system(f"./simulate.sh ./dataa {number_images} nt ./netlist_1000x10")
 
     #read the accuracy from accuracy.txt
-    with open(f"./dataa/accuracy.txt", "r") as file:
+    with open(f"./accuracy.txt", "r") as file:
         accuracy = file.read()
         print(f"Accuracy: {accuracy}")
         accuracies.append(accuracy)
