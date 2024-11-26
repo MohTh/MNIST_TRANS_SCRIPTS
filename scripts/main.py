@@ -30,6 +30,7 @@ config.read('./config.txt')
 cmpt_t=config.get('DEFAULT','cmpt_t')
 reset_t=config.get('DEFAULT','reset_t')
 trans_t=config.get('DEFAULT','trans_t')
+CAP=config.get('DEFAULT','cap')
 
 
 
@@ -58,7 +59,7 @@ if __name__ == "__main__":
             os.system(f"rm -r {sys.argv[1]}")
         gen_images.gen_images(sys.argv[1],int(sys.argv[2]))
         gen_inputs.gen_inputs("./stimul",sys.argv[1], int(sys.argv[2]),1000,float(cmpt_t),float(reset_t),float(trans_t))
-        gen_netlist.gen_netlist(sys.argv[1],int(sys.argv[2]),sys.argv[4])
+        gen_netlist.gen_netlist(sys.argv[1],int(sys.argv[2]),sys.argv[4],CAP)
 
         # Path to your text file
         file_path = f"{sys.argv[1]}/netlist"

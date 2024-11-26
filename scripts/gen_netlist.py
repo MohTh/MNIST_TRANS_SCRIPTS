@@ -1,6 +1,6 @@
 import shutil
 import os
-def gen_netlist(path, number , input_netlist):
+def gen_netlist(path, number , input_netlist,CAP):
     current_path = os.getcwd()
     stim_path = current_path + "/stimul/"
     # Read values from file and assign to an array
@@ -55,6 +55,10 @@ def gen_netlist(path, number , input_netlist):
                 file3.write(line)
                 line = f"VVV5 (VD 0) vsource dc=0.6 type=dc\n"
                 file3.write(line)
+                for i in range(10):
+                    line=f"C00{i} (OUTp\<{i}\> 0) capacitor c={CAP}\n"
+                    line=f"C01{i} (OUTn\<{i}\> 0) capacitor c={CAP}\n"
+                    file3.write(line)
 
                 with open("./simul_1u_trans.txt", "r") as file2:
                     for line in file2:
