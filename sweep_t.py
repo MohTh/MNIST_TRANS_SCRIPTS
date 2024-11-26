@@ -9,7 +9,7 @@ max_cmpt=2e-9
 step_size=0.1e-9
 trans_t=0.05e-9
 reset_t=2e-9
-
+cap=1e-12
 
 #generate the times between min and max with step size
 times = np.arange(min_cmpt,max_cmpt,step_size)
@@ -24,6 +24,7 @@ for time in times:
         file.write(f"cmpt_t={time}\n")
         file.write(f"reset_t={reset_t}\n")
         file.write(f"trans_t={trans_t}\n")
+        file.write(f"cap={cap}\n")
     
     #run the simulation
     os.system(f"./simulate.sh ./dataa {number_images} nt ./netlist_1000x10")
