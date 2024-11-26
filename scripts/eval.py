@@ -61,13 +61,19 @@ if __name__ == "__main__":
                         elif j!=0:
                             if time_array[j-1]<(cmpt_t + reset_t +trans_t)*jj + reset_t+cmpt_t and time_array[j]>(cmpt_t + reset_t +trans_t)*jj + reset_t+cmpt_t:
                                     temp_out.append(Out[i][j-1])
-
+            
             Output.append(temp_out)
 
+        # print(f"First: {Output[0]}")
+        
+        
+        transposed_array = list(zip(*Output))
+
+        #    Convert tuples back to lists if needed
+        Output = [list(row) for row in transposed_array]      
+        # print(f"Second: {Output[0]}")
 
         print(f"EVAL: Number of processed images: {len(Output[0])}")
-
-
         
               
 
@@ -85,7 +91,8 @@ if __name__ == "__main__":
                             file_path = os.path.join(root, file)
                             # Process the file as needed
                             # For example, you can open and read the file using file_path
-                            Prediction = Output[ll]
+                            Prediction = Output[:][ll]
+                            ll+=1
 
 
                             # with open(file_path, "r") as f:
