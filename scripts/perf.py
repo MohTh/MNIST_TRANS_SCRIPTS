@@ -28,3 +28,10 @@ print(f"Simulation accuracy: {sim_acc}")
 print(f"Simulation accuracy compared to NN: {sim}")
 
 
+#print simulation accuracy in a file
+
+with open("accuracy.txt", "w") as file:
+    file.write(f"Simulation accuracy: {sim_acc}\n")
+
+
+
