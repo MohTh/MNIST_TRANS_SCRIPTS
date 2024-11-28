@@ -3,9 +3,9 @@ import os
 import csv 
 
 
-number_images=100
-min_cmpt=0.5e-9
-max_cmpt=2e-9
+number_images=1000
+min_cmpt=1.1e-9
+max_cmpt=1.4e-9
 step_size=0.1e-9
 trans_t=0.05e-9
 reset_t=2e-9
