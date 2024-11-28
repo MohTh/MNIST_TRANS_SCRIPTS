@@ -64,10 +64,12 @@ if __name__ == "__main__":
                         
                         if time_array[j]==(cmpt_t + reset_t +trans_t)*jj + reset_t+cmpt_t-trans_t:
                             temp_out.append(Out[i][j])
+                            j=len(time_array)
                             #print(f"Time: {time_array[j]}")
                         elif j!=0:
                             if time_array[j-1]<(cmpt_t + reset_t +trans_t)*jj + reset_t+cmpt_t-trans_t and time_array[j]>(cmpt_t + reset_t +trans_t)*jj + reset_t+cmpt_t-trans_t:
                                     temp_out.append(Out[i][j-1])
+                                    j=len(time_array)
                                     #print(f"Time: {time_array[j]}")
             
             Output.append(temp_out)
