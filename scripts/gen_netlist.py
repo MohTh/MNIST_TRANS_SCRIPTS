@@ -53,7 +53,7 @@ def gen_netlist(path, number , input_netlist,CAP):
                 file3.write(line)
                 line = f"VVV4 (CLR 0) vsource type=pwl file=\"{stim_path}CLR.txt\" \n"
                 file3.write(line)
-                line = f"VVV6 (CLRNMOS 0) vsource type=pwl file=\"{stim_path}CLR_NMOS.txt.txt\" \n"
+                line = f"VVV6 (CLRNMOS 0) vsource type=pwl file=\"{stim_path}CLR_NMOS.txt\" \n"
                 file3.write(line)
                 line = f"VVV5 (VD 0) vsource dc=0.6 type=dc\n"
                 file3.write(line)
