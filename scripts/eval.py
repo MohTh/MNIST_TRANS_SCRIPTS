@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 import sys
 import configparser
+import time
 
 #%%
 def main():
@@ -14,6 +15,7 @@ def main():
 
 
 if __name__ == "__main__":
+    
     config=configparser.ConfigParser()
     config.read('./config.txt')
     cmpt_tt=config.get('DEFAULT','cmpt_t')
@@ -54,29 +56,31 @@ if __name__ == "__main__":
 
 
         #sampling
+        # start_time = time.time()
         print(f"Sampling data")
         for i in range(10):
-            print(f"Processing: {i}/10")
             temp_out=[]
-            for jj in range(int(sys.argv[2])):
-                print(f"Processing2: {jj}/{sys.argv[2]}")
-                for j in range(len(time_array)):
-                        
+            # for jj in range(int(sys.argv[2])):
+            jj=0
+            while jj<int(sys.argv[2]):
+                for j in range(1,len(time_array)):
                         if time_array[j]==(cmpt_t + reset_t +trans_t)*jj + reset_t+cmpt_t-trans_t:
                             temp_out.append(Out[i][j])
                             j=len(time_array)
-                            #print(f"Time: {time_array[j]}")
-                        elif j!=0:
-                            if time_array[j-1]<(cmpt_t + reset_t +trans_t)*jj + reset_t+cmpt_t-trans_t and time_array[j]>(cmpt_t + reset_t +trans_t)*jj + reset_t+cmpt_t-trans_t:
+                            jj+=1
+                        
+                        elif time_array[j-1]<(cmpt_t + reset_t +trans_t)*jj + reset_t+cmpt_t-trans_t and time_array[j]>(cmpt_t + reset_t +trans_t)*jj + reset_t+cmpt_t-trans_t:
                                     temp_out.append(Out[i][j-1])
                                     j=len(time_array)
-                                    #print(f"Time: {time_array[j]}")
+                                    jj+=1
             
             Output.append(temp_out)
 
         print(f"Sampling done")
+        # end_time = time.time()
+
+        # print(f"Time taken: {end_time-start_time}")
         # print(f"First: {Output[0]}")
-        
         
         transposed_array = list(zip(*Output))
 
