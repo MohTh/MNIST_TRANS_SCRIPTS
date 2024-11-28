@@ -29,7 +29,6 @@ if __name__ == "__main__":
         print("Usage error")
         print("Usage: python3 eval.py <data_parent_folder> <number of images>")
     else: 
-        #open all the spectre.dc files present in the folders contained in teh data directory
         data_directory = sys.argv[1]
         NN_prediction = []
         NN_label = []
@@ -38,18 +37,24 @@ if __name__ == "__main__":
         Label=[]
         Out=[]
         Output=[]
-        #import arrays from csv 
-        
         # Read the CSV file into a DataFrame
+        print(f"Reading data from {data_directory}")
         data = pd.read_csv(f"{data_directory}/tran.csv")
+        print(f"Reading done")
 
         # Extract the "time" column and the "I0:XXXX" columns
+
+        print(f"Extracting data")
         time_array = data["time"].values
         current_arrays = {col: data[col].values for col in data.columns if col.startswith("I0:")}
         for i in range(10):
               Out.append(current_arrays[f"I0:{11032+i}"]-current_arrays[f"I0:{11022+i}"])
 
-        
+        print(f"Extraction done")
+
+
+        #sampling
+        print(f"Sampling data")
         for i in range(10):
               
             temp_out=[]
@@ -66,6 +71,7 @@ if __name__ == "__main__":
             
             Output.append(temp_out)
 
+        print(f"Sampling done")
         # print(f"First: {Output[0]}")
         
         

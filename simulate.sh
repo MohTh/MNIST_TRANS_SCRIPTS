@@ -90,6 +90,8 @@ fi
 
 echo "Running DC Simulations"
 # Pass the third argument to the second shell script
+
+echo "Executing: $SPECTRE_SIM_SCRIPT ${1}"
 bash "$SPECTRE_SIM_SCRIPT" "${1}"
 
 # Check if the second shell script executed successfully
@@ -103,6 +105,7 @@ fi
 
 echo "Running Eval Py script"
 # Eval script
+echo "Executing: python3 $EVAL_PY ${1} ${2}"
 python3 "$EVAL_PY" "${1}" "${2}"
 
 # Check if the Python script executed successfully
