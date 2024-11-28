@@ -56,9 +56,10 @@ if __name__ == "__main__":
         #sampling
         print(f"Sampling data")
         for i in range(10):
-              
+            print(f"Processing: {i}/10")
             temp_out=[]
             for jj in range(int(sys.argv[2])):
+                print(f"Processing2: {jj}/{sys.argv[2]}")
                 for j in range(len(time_array)):
                         
                         if time_array[j]==(cmpt_t + reset_t +trans_t)*jj + reset_t+cmpt_t-trans_t:
