@@ -26,6 +26,7 @@ def gen_inputs(out_path, in_path,number_images, number_inputs, cmpt_t, reset_t,t
     imagess = np.zeros((number_images, number_inputs))
     levels = np.zeros((5*number_images, number_inputs))
     CLR_s=np.zeros(5*number_images)
+    CLRR_sNMOS=np.zeros(5*number_images)
     times = np.zeros(5*number_images)
     times_rst = np.zeros(5*number_images)
     for i in range(number_images):
@@ -61,6 +62,12 @@ def gen_inputs(out_path, in_path,number_images, number_inputs, cmpt_t, reset_t,t
             CLR_s[5*i+3] = 0.6
             CLR_s[5*i+4] = 0.6
 
+            CLRR_sNMOS[5*i] = 0
+            CLRR_sNMOS[5*i+1] = 0.6
+            CLRR_sNMOS[5*i+2] = 0.6
+            CLRR_sNMOS[5*i+3] = 0
+            CLRR_sNMOS[5*i+4] = 0
+
             times_rst[5*i] = (cmpt_t + reset_t+trans_t)*i
             times_rst[5*i+1] = (cmpt_t + reset_t+trans_t)*i + trans_t
             times_rst[5*i+2] = (cmpt_t + reset_t+trans_t)*i + reset_t - trans_t
@@ -82,6 +89,10 @@ def gen_inputs(out_path, in_path,number_images, number_inputs, cmpt_t, reset_t,t
     with open(f"{out_path}/CLR.txt", "w") as file:
         for j in range(5*number_images):
             file.write(f"{times_rst[j]} {CLR_s[j]}\n")
+
+    with open(f"{out_path}/CLR_NMOS.txt", "w") as file:
+        for j in range(5*number_images):
+            file.write(f"{times_rst[j]} {CLRR_sNMOS[j]}\n")
 
 
 
