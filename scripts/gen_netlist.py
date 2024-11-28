@@ -53,12 +53,30 @@ def gen_netlist(path, number , input_netlist,CAP):
                 file3.write(line)
                 line = f"VVV4 (CLR 0) vsource type=pwl file=\"{stim_path}CLR.txt\" \n"
                 file3.write(line)
+                line = f"VVV5 (CLRNMOS 0) vsource type=pwl file=\"{stim_path}CLR_NMOS.txt.txt\" \n"
+                file3.write(line)
                 line = f"VVV5 (VD 0) vsource dc=0.6 type=dc\n"
                 file3.write(line)
                 for i in range(10):
                     line=f"C00{i} (OUTp\<{i}\> 0) capacitor c={CAP}\n"
+                    file3.write(line)
+                    line=f"M000{i} (OUTp\<{i}\> CLRNMOS 0 0) nch l=120.0n w=500n m=1 nf=1 sd=200n ad=8.75e-14 \\ \n"
+                    file3.write(line)
+                    line=f"as=8.75e-14 pd=1.35u ps=1.35u nrd=0.2 nrs=0.2 sa=175.00n \\ \n"
+                    file3.write(line)
+                    line=f"sb=175.00n sca=0 scb=0 scc=0\n"
+                    file3.write(line)
                     line=f"C01{i} (OUTn\<{i}\> 0) capacitor c={CAP}\n"
                     file3.write(line)
+
+                    line=f"M001{i} (OUTn\<{i}\> CLRNMOS 0 0) nch l=120.0n w=500n m=1 nf=1 sd=200n ad=8.75e-14 \\ \n"
+                    file3.write(line)
+                    line=f"as=8.75e-14 pd=1.35u ps=1.35u nrd=0.2 nrs=0.2 sa=175.00n \\ \n"
+                    file3.write(line)
+                    line=f"sb=175.00n sca=0 scb=0 scc=0\n"
+                    file3.write(line)
+                    
+                    
 
                 with open("./simul_1u_trans.txt", "r") as file2:
                     for line in file2:
