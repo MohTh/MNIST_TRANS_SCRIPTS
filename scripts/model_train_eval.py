@@ -83,7 +83,7 @@ def model_train_eval():
     # %%
 
     #training hyperparameters
-    num_epochs = 10
+    num_epochs = 100
     learning_rate = 0.0001
 
     #loss and optimizer
@@ -91,7 +91,7 @@ def model_train_eval():
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
     #data loader
-    batch_size = 32
+    batch_size = 128
     train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
     test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=batch_size, shuffle=False)
     #training the model
