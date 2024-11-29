@@ -83,15 +83,15 @@ def model_train_eval():
     # %%
 
     #training hyperparameters
-    num_epochs = 5
-    learning_rate = 0.1
+    num_epochs = 10
+    learning_rate = 0.0001
 
     #loss and optimizer
     criterion = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
     #data loader
-    batch_size = 512
+    batch_size = 32
     train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
     test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=batch_size, shuffle=False)
     #training the model
