@@ -50,7 +50,7 @@ if __name__ == "__main__":
         time_array = data["time"].values
         current_arrays = {col: data[col].values for col in data.columns if col.startswith("Isink:")}
         for i in range(10):
-              Out.append(current_arrays[f"Isink:{i}"]-current_arrays[f"Isink:{10+i}"])
+              Out.append(current_arrays[f"Isink:{i+1}"]-current_arrays[f"Isink:{11+i}"])
 
         print(f"Extraction done")
 
