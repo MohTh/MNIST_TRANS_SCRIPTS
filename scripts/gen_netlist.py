@@ -96,6 +96,7 @@ def gen_netlist(path, number , input_netlist,CAP,dk_config):
             value = line.strip()
             VBP.append(value)
     # shutil.copyfile(input_netlist, f"{path}/netlist")
+    gen_circuit(dk_config,path)
     with open(f"{path}/netlist", "a") as file3:
             # for i in range(number):
             #     folder_name = f"{path}/image_{i}"
