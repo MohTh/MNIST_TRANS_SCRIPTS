@@ -1,0 +1,1 @@
+<INST> (<drain> <gate> <source> <bulk>) pch l=60n w=120.0n m=1 nf=1 sd=350.0n ad=3.45e-14 as=3.45e-14 pd=800n ps=800n nrd=1.45833 nrs=1.45833 sa=250.0n sb=250.0n sca=0 scb=0 scc=0

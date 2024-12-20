@@ -1,0 +1,1 @@
+<INST> (<drain> <gate> <source> <bulk>) nch l=130.0n w=250.00000u m=5 nf=5 sd=200n ad=2.875e-11 as=2.875e-11 pd=301.15u ps=301.15u nrd=0.0004 nrs=0.0004 sa=175.00n sb=175.00n sca=0 scb=0 scc=0

@@ -1,0 +1,1 @@
+<INST> (<PLUS> <MINUS> <BULK>) mimcap_sin_3t lt=2u wt=2u lay=7 mf=1 mimflag=3 mismatchflag=0
