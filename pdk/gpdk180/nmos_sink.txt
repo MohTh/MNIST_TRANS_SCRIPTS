@@ -1,0 +1,1 @@
+<INST> (<drain> <gate> <source> <bulk>) nmos1 w=(250u) l=180n as=440f ad=440f ps=2.8u pd=2.8u m=(1)*(1)
