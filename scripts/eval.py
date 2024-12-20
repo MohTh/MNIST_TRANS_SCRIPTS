@@ -48,9 +48,9 @@ if __name__ == "__main__":
 
         print(f"Extracting data")
         time_array = data["time"].values
-        current_arrays = {col: data[col].values for col in data.columns if col.startswith("I0:")}
+        current_arrays = {col: data[col].values for col in data.columns if col.startswith("Isink:")}
         for i in range(10):
-              Out.append(current_arrays[f"I0:{11032+i}"]-current_arrays[f"I0:{11022+i}"])
+              Out.append(current_arrays[f"Isink:{i}"]-current_arrays[f"Isink:{10+i}"])
 
         print(f"Extraction done")
 

@@ -12,7 +12,7 @@ current_data = defaultdict(list)
 
 # Regular expressions for matching
 time_pattern = re.compile(r'"time"\s+([+-]?\d+\.?\d*e[+-]?\d+)')
-current_pattern = re.compile(r'"I0:(\d+)"\s+([+-]?\d+\.?\d*e[+-]?\d+)')
+current_pattern = re.compile(r'"Isink:(\d+)"\s+([+-]?\d+\.?\d*e[+-]?\d+)')
 
 # Read and parse the file
 with open(file_path, 'r') as file:
@@ -34,7 +34,7 @@ with open(file_path, 'r') as file:
 current_data = dict(current_data)
 
 # Prepare data for writing to CSV
-headers = ["time"] + [f"I0:{key}" for key in sorted(current_data.keys())]
+headers = ["time"] + [f"Isink:{key}" for key in sorted(current_data.keys())]
 rows = []
 
 # Make sure all arrays are the same length by padding with empty values
