@@ -70,7 +70,7 @@ def gen_circuit(dk_config,path):
             file.write(transistor(nmos_sink,f"Msp{i}","out",f"in\<{i}\>",f"in\<{i}\>","out"))
             file.write("\n")
             file.write("\t")
-            file.write(transistor(nmos_sink,f"Msn{i}","out",f"in\<{2*i}\>",f"in\<{2*i}\>","out"))
+            file.write(transistor(nmos_sink,f"Msn{i}","out",f"in\<{10+i}\>",f"in\<{10+i}\>","out"))
             file.write("\n")
         file.write("ends _sub1")
 
