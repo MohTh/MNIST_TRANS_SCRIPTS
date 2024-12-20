@@ -73,6 +73,8 @@ def gen_circuit(dk_config,path):
             file.write(transistor(nmos_sink,f"Msn{i}","out",f"in\<{2*i}\>",f"in\<{2*i}\>","out"))
             file.write("\n")
         file.write("ends _sub1")
+
+        file.write("\n")
         
         #generate input column
         for i in range(784):
