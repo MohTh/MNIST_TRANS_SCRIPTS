@@ -30,6 +30,10 @@ def gen_circuit(dk_config,path):
     
     
     with open(f"{path}/netlist", "w") as file:
+        #get date and time 
+        import datetime
+        now = datetime.datetime.now()
+        file.write(f"//This netlist was generated automatically on {now.strftime('%Y-%m-%d %H:%M:%S')}\n")
         file.write("simulator lang=spectre\n")
         file.write("global 0\n")
         file.write("parameters temperature=27\n")
@@ -62,7 +66,7 @@ def gen_circuit(dk_config,path):
         for i in range(784):
             file.write(transistor(pmos,f"Mi{i}","VD",f"INA\<{i}\>",f"INA\<{i}\>","VD"))
             file.write("\n")
-            file.write(transistor(pmos,f"Mi{i}","VD","CLR",f"INA\<{i}\>","VD"))
+            file.write(transistor(pmos,f"Mclr{i}","VD","CLR",f"INA\<{i}\>","VD"))
             file.write("\n")
 
         #generate compute column
@@ -143,7 +147,7 @@ def gen_netlist(path, number , input_netlist,CAP,dk_config):
                 for i in range(10):
                     line=f"C00{i} (OUTp\<{i}\> 0) capacitor c={CAP}\n"
                     file3.write(line)
-                    line=transistor(nmos,f"M001{i}","0",f"OUTp\<{i}\>",f"CLRNMOS","0")
+                    line=transistor(nmos,f"M00p1{i}","0",f"OUTp\<{i}\>",f"CLRNMOS","0")
                     file3.write(line)
                     file3.write("\n")
                     # line=f"M000{i} (OUTp\<{i}\> CLRNMOS 0 0) nch l=120.0n w=500n m=1 nf=1 sd=200n ad=8.75e-14 \\ \n"
@@ -157,7 +161,7 @@ def gen_netlist(path, number , input_netlist,CAP,dk_config):
                     file3.write(line)
                     
                     
-                    line=transistor(nmos,f"M001{i}","0",f"OUTn\<{i}\>",f"CLRNMOS","0")
+                    line=transistor(nmos,f"M00n1{i}","0",f"OUTn\<{i}\>",f"CLRNMOS","0")
                     # line=f"M001{i} (OUTn\<{i}\> CLRNMOS 0 0) nch l=120.0n w=500n m=1 nf=1 sd=200n ad=8.75e-14 \\ \n"
                     file3.write(line)
                     file3.write("\n")
