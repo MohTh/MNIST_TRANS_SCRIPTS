@@ -26,7 +26,7 @@ import gen_inputs
 
 
 
-dk_config = "./pdk/tsmc65"
+dk_config = "./pdk/gpdk180"
 
 config=configparser.ConfigParser()
 config.read('./config.txt')
