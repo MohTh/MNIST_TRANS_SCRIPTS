@@ -1,6 +1,86 @@
 import shutil
 import os
-def gen_netlist(path, number , input_netlist,CAP):
+
+def transistor(template,name,source,drain,gate,bulk):
+    template = template.replace("<INST>",name)
+    template = template.replace("<source>",source)
+    template = template.replace("<drain>",drain)
+    template = template.replace("<gate>",gate)
+    template = template.replace("<bulk>",bulk)
+    return template
+def capacitor(template,name,plus,minus,bulk):
+    template = template.replace("<INST>",name)
+    template = template.replace("<PLUS>",plus)
+    template = template.replace("<MINUS>",minus)
+    template = template.replace("<BULK>",bulk)
+    return template
+
+def gen_circuit(dk_config,path):
+    #read the pdk config files
+    with open(f"{dk_config}/nmos.txt", "r") as file:
+        nmos = file.read()
+    with open(f"{dk_config}/nmos_sink.txt", "r") as file:
+        nmos_sink = file.read()
+    with open(f"{dk_config}/pmos.txt", "r") as file:
+        pmos = file.read()
+    with open(f"{dk_config}/cap.txt", "r") as file:
+        cap = file.read()
+    with open(f"{dk_config}/path.txt", "r") as file:
+        path_dk = file.read()
+    
+    
+    with open(f"{path}/netlist", "w") as file:
+        file.write("simulator lang=spectre\n")
+        file.write("global 0\n")
+        file.write("parameters temperature=27\n")
+        file.write(path_dk)
+        file.write("\n")
+        #generate 4T1C Cell 
+        file.write("subckt _sub0 BL INA INB INB2 OUTn OUTp VD Vbn Vbp WL WLb gndd \n")
+        file.write("\t")
+        file.write(capacitor(cap,"C0","INB","gndd","gndd"))
+        file.write("\n")
+        file.write("\t")
+        file.write(transistor(pmos,"M1","BL","INB","WLb","Vbp"))
+        file.write("\n")
+        file.write("\t")
+        file.write(transistor(pmos,"M4","INB","net9","gndd","Vbp"))
+        file.write("\n")
+        file.write("\t")
+        file.write(transistor(pmos,"M3","VD","OUTn","INA","INB2"))
+        file.write("\n")
+        file.write("\t")
+        file.write(transistor(pmos,"M0","VD","OUTp","INA","net9"))
+        file.write("\n")
+        file.write("\t")
+        file.write(transistor(nmos,"r","INB","BL","WL","Vbn"))
+        file.write("\n")
+        file.write("ends _sub0")
+        file.write("\n")
+
+        #generate input column
+        for i in range(784):
+            file.write(transistor(pmos,f"Mi{i}","VD","INA\<{i}\>","INA\<{i}\>","VD"))
+            file.write("\n")
+            file.write(transistor(pmos,f"Mi{i}","VD","CLR","INA\<{i}\>","VD"))
+            file.write("\n")
+
+        #generate compute column
+        for i in range(10):
+            for j in range(784):
+                file.write(f"Icell{j+i*784} (BL\<{i}\> INA\<{j}\> INB\<{j+i*784}\> INB2\<{i}\> OUTn\<{i}\> OUTp\<{i}\> VD Vbn Vbp WL\<{j}\> WLb\<{j}\> 0) _sub0")
+                file.write("\n")
+        
+        #generate sink transistors
+        for i in range(10):
+            file.write(transistor(nmos_sink,f"Msp{i}","0","OUTp\<{i}\>","OUTp\<{i}\>","0"))
+            file.write("\n")
+            file.write(transistor(nmos_sink,f"Msn{i}","0","OUTn\<{i}\>","OUTn\<{i}\>","0"))
+            file.write("\n")
+
+
+
+def gen_netlist(path, number , input_netlist,CAP,dk_config):
     current_path = os.getcwd()
     stim_path = current_path + "/stimul/"
     # Read values from file and assign to an array
@@ -57,24 +137,33 @@ def gen_netlist(path, number , input_netlist,CAP):
                 file3.write(line)
                 line = f"VVV5 (VD 0) vsource dc=0.6 type=dc\n"
                 file3.write(line)
+                with open(f"{dk_config}/nmos.txt", "r") as file:
+                    nmos = file.read()
                 for i in range(10):
                     line=f"C00{i} (OUTp\<{i}\> 0) capacitor c={CAP}\n"
                     file3.write(line)
-                    line=f"M000{i} (OUTp\<{i}\> CLRNMOS 0 0) nch l=120.0n w=500n m=1 nf=1 sd=200n ad=8.75e-14 \\ \n"
+                    line=transistor(nmos,f"M001{i}","0",f"OUTp\<{i}\>",f"CLRNMOS","0")
                     file3.write(line)
-                    line=f"as=8.75e-14 pd=1.35u ps=1.35u nrd=0.2 nrs=0.2 sa=175.00n \\ \n"
-                    file3.write(line)
-                    line=f"sb=175.00n sca=0 scb=0 scc=0\n"
-                    file3.write(line)
+                    file3.write("\n")
+                    # line=f"M000{i} (OUTp\<{i}\> CLRNMOS 0 0) nch l=120.0n w=500n m=1 nf=1 sd=200n ad=8.75e-14 \\ \n"
+                    # file3.write(line)
+                    # line=f"as=8.75e-14 pd=1.35u ps=1.35u nrd=0.2 nrs=0.2 sa=175.00n \\ \n"
+                    # file3.write(line)
+                    # line=f"sb=175.00n sca=0 scb=0 scc=0\n"
+                    # file3.write(line)
+
                     line=f"C01{i} (OUTn\<{i}\> 0) capacitor c={CAP}\n"
                     file3.write(line)
-
-                    line=f"M001{i} (OUTn\<{i}\> CLRNMOS 0 0) nch l=120.0n w=500n m=1 nf=1 sd=200n ad=8.75e-14 \\ \n"
+                    
+                    
+                    line=transistor(nmos,f"M001{i}","0",f"OUTn\<{i}\>",f"CLRNMOS","0")
+                    # line=f"M001{i} (OUTn\<{i}\> CLRNMOS 0 0) nch l=120.0n w=500n m=1 nf=1 sd=200n ad=8.75e-14 \\ \n"
                     file3.write(line)
-                    line=f"as=8.75e-14 pd=1.35u ps=1.35u nrd=0.2 nrs=0.2 sa=175.00n \\ \n"
-                    file3.write(line)
-                    line=f"sb=175.00n sca=0 scb=0 scc=0\n"
-                    file3.write(line)
+                    file3.write("\n")
+                    # line=f"as=8.75e-14 pd=1.35u ps=1.35u nrd=0.2 nrs=0.2 sa=175.00n \\ \n"
+                    # file3.write(line)
+                    # line=f"sb=175.00n sca=0 scb=0 scc=0\n"
+                    # file3.write(line)
                     
                     
 
