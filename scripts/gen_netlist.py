@@ -60,9 +60,9 @@ def gen_circuit(dk_config,path):
 
         #generate input column
         for i in range(784):
-            file.write(transistor(pmos,f"Mi{i}","VD","INA\<{i}\>","INA\<{i}\>","VD"))
+            file.write(transistor(pmos,f"Mi{i}","VD",f"INA\<{i}\>",f"INA\<{i}\>","VD"))
             file.write("\n")
-            file.write(transistor(pmos,f"Mi{i}","VD","CLR","INA\<{i}\>","VD"))
+            file.write(transistor(pmos,f"Mi{i}","VD","CLR",f"INA\<{i}\>","VD"))
             file.write("\n")
 
         #generate compute column
@@ -73,9 +73,9 @@ def gen_circuit(dk_config,path):
         
         #generate sink transistors
         for i in range(10):
-            file.write(transistor(nmos_sink,f"Msp{i}","0","OUTp\<{i}\>","OUTp\<{i}\>","0"))
+            file.write(transistor(nmos_sink,f"Msp{i}","0",f"OUTp\<{i}\>",f"OUTp\<{i}\>","0"))
             file.write("\n")
-            file.write(transistor(nmos_sink,f"Msn{i}","0","OUTn\<{i}\>","OUTn\<{i}\>","0"))
+            file.write(transistor(nmos_sink,f"Msn{i}","0",f"OUTn\<{i}\>",f"OUTn\<{i}\>","0"))
             file.write("\n")
 
 
