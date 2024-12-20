@@ -94,6 +94,7 @@ def gen_circuit(dk_config,path):
         for i in range(10):
             file.write(f"OUTn\<{i}\> ")
         file.write(" 0) _sub1")
+        file.write("\n")
 
 
 
