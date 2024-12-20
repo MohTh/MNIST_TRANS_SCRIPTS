@@ -11,7 +11,5 @@ outputParameter info what=output where=rawfile
 designParamVals info what=parameters where=rawfile
 primitives info what=primitives where=rawfile
 subckts info what=subckts where=rawfile
-save I0:11032 I0:11033 I0:11034 I0:11035 I0:11036 I0:11037 I0:11038 \
-    I0:11039 I0:11040 I0:11041 I0:11022 I0:11023 I0:11024 I0:11025 \
-    I0:11026 I0:11027 I0:11028 I0:11029 I0:11030 I0:11031 
+save Isink:0 Isink:1 Isink:2 Isink:3 Isink:4 Isink:5 Isink:6 Isink:7 Isink:8 Isink:9 Isink:10 Isink:11 Isink:12 Isink:13 Isink:14 Isink:15 Isink:16 Isink:17 Isink:18 Isink:19
 saveOptions options save=none
