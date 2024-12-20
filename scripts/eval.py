@@ -153,8 +153,8 @@ if __name__ == "__main__":
                                 file.write("\n \n Simulation \n")
                                 #Prediction=np.array(Prediction)
                                 #Prediction=np.abs(Prediction)
-                                Prediction3=[-x for x in Prediction]
-                                Prediction2 = Prediction3[::-1]
+                                Prediction3=[x for x in Prediction]
+                                Prediction2 = Prediction3#[::-1]
                                 #positoin of the max value
                                 #print(Prediction)
                                 print(Prediction2)
