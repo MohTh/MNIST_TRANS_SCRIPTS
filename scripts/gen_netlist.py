@@ -61,7 +61,19 @@ def gen_circuit(dk_config,path):
         file.write("\n")
         file.write("ends _sub0")
         file.write("\n")
-
+        file.write("subckt _sub1 ")
+        for i in range(20):
+            file.write(f"in\<{i}\> ")
+        file.write("out \n")
+        for i in range(10):
+            file.write("\t")
+            file.write(transistor(nmos_sink,f"Msp{i}","out",f"in\<{i}\>",f"in\<{i}\>","out"))
+            file.write("\n")
+            file.write("\t")
+            file.write(transistor(nmos_sink,f"Msn{i}","out",f"in\<{2*i}\>",f"in\<{2*i}\>","out"))
+            file.write("\n")
+        file.write("ends _sub1")
+        
         #generate input column
         for i in range(784):
             file.write(transistor(pmos,f"Mi{i}","VD",f"INA\<{i}\>",f"INA\<{i}\>","VD"))
@@ -76,11 +88,12 @@ def gen_circuit(dk_config,path):
                 file.write("\n")
         
         #generate sink transistors
+        file.write("Isink (")
         for i in range(10):
-            file.write(transistor(nmos_sink,f"Msp{i}","0",f"OUTp\<{i}\>",f"OUTp\<{i}\>","0"))
-            file.write("\n")
-            file.write(transistor(nmos_sink,f"Msn{i}","0",f"OUTn\<{i}\>",f"OUTn\<{i}\>","0"))
-            file.write("\n")
+            file.write(f"OUTp\<{i}\> ")
+        for i in range(10):
+            file.write(f"OUTn\<{i}\> ")
+        file.write(" 0) _sub1")
 
 
 
