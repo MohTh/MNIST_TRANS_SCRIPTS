@@ -25,6 +25,9 @@ import gen_inputs
 #USAGE: python main.py <output_folder_path> <number_of_images>  <t/nt> <input netlist path>
 
 
+
+dk_config = "./pdk/tsmc65"
+
 config=configparser.ConfigParser()
 config.read('./config.txt')
 cmpt_t=config.get('DEFAULT','cmpt_t')
@@ -59,7 +62,7 @@ if __name__ == "__main__":
             os.system(f"rm -r {sys.argv[1]}")
         gen_images.gen_images(sys.argv[1],int(sys.argv[2]))
         gen_inputs.gen_inputs("./stimul",sys.argv[1], int(sys.argv[2]),1000,float(cmpt_t),float(reset_t),float(trans_t))
-        gen_netlist.gen_netlist(sys.argv[1],int(sys.argv[2]),sys.argv[4],CAP)
+        gen_netlist.gen_netlist(sys.argv[1],int(sys.argv[2]),sys.argv[4],CAP,dk_config)
 
         # Path to your text file
         file_path = f"{sys.argv[1]}/netlist"
