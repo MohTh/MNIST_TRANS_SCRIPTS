@@ -1,5 +1,6 @@
 [DEFAULT]
-cmpt_t = 20e-9
-reset_t = 0.5e-9
-trans_t = 0.05e-9
-cap=0
+cmpt_t=1e-09
+reset_t=2e-09
+trans_t=5e-11
+cap=1e-12
+

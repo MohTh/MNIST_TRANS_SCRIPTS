@@ -17,14 +17,14 @@ class NeuralNetwork(torch.nn.Module):
     #        self.hidden_layer2 = torch.nn.Linear(1024, 2000)  # One hidden layer with 10 neurons
     #        self.hidden_layer3 = torch.nn.Linear(2000, 784)  # One hidden layer with 10 neurons
     #        self.hidden_layer4 = torch.nn.Linear(2000, 128)  # One hidden layer with 10 neurons
-            self.output_layer = torch.nn.Linear(784, 10,bias=False)  # Output layer with 1 neuron
+            self.output_layer = torch.nn.Linear(784, 10,bias=True)  # Output layer with 1 neuron
 
         def forward(self, x):
             # x = torch.relu(self.hidden_layer(x))
             # x = torch.relu(self.hidden_layer2(x))
             # x = torch.relu(self.hidden_layer3(x))
     #        x = torch.relu(self.hidden_layer4(x))
-            x = (self.output_layer(x))
+            x = torch.relu(self.output_layer(x))
             return x
         
 
@@ -83,7 +83,7 @@ def model_train_eval():
     # %%
 
     #training hyperparameters
-    num_epochs = 100
+    num_epochs = 20
     learning_rate = 0.0001
 
     #loss and optimizer
@@ -95,7 +95,8 @@ def model_train_eval():
     train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
     test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=batch_size, shuffle=False)
     #training the model
-
+    acc=[]
+    losss=[]
     for epoch in range(num_epochs):
         for i, (images, labels) in enumerate(train_loader):
             # Convert images to tensors
@@ -115,6 +116,51 @@ def model_train_eval():
 
             if (i+1) % 100 == 0:
                 print(f'Epoch [{epoch+1}/{num_epochs}], Step [{i+1}/{len(train_dataset)//batch_size}], Loss: {loss.item():.4f}')
+        
+        model.eval()
+        total_correct = 0
+        total_samples = 0
+        with torch.no_grad():
+            for images, labels in train_loader:
+                images = torch.stack([torch.Tensor(np.array(image.flatten())) for image in images])
+                labels = torch.tensor(labels)
+                images, labels = images.to(device), labels.to(device)
+                
+                outputs = model(images)
+                _, predicted = torch.max(outputs.data, 1)
+                
+                total_samples += labels.size(0)
+                total_correct += (predicted == labels).sum().item()
+
+        accuracy = 100 * total_correct / total_samples
+        acc.append(accuracy)
+        losss.append(loss.item())
+        print(f'train Accuracy: {accuracy:.2f}%')
+
+
+
+    # Plot loss and accuracy
+    plt.figure(figsize=(10, 5))
+
+    # Plot accuracy
+    plt.subplot(1, 2, 1)
+    plt.plot(acc, label='Accuracy')
+    plt.xlabel('Epoch')
+    plt.ylabel('Accuracy')
+    plt.title('Training Accuracy')
+    plt.legend()
+
+    # Plot loss
+    plt.subplot(1, 2, 2)
+    plt.plot(losss, label='Loss')
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss')
+    plt.title('Training Loss')
+    plt.legend()
+
+    plt.tight_layout()
+    plt.show()
+
 
     minn=-1
     maxx=1
@@ -140,6 +186,7 @@ def model_train_eval():
                         else:
                             weight_fc1[i][j] = stepss[ii]
                         break
+        
 
         model.output_layer.weight = weight_fc1
 
