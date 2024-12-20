@@ -69,8 +69,8 @@ fi
 
 
 # Check if enough arguments are provided
-if [ "$#" -lt 4 ]; then
-  echo "USAGE: ./simulate.sh <output_folder_path> <number_of_images>  <t/nt> <input netlist path>"
+if [ "$#" -lt 3 ]; then
+  echo "USAGE: ./simulate.sh <output_folder_path> <number_of_images>  <t/nt> "
   exit 1
 fi
 
@@ -79,7 +79,7 @@ fi
 echo "Running netlist gen py (main.py)"
 
 # Pass the first five arguments to the Python script
-python3 "$NETLIST_GEN_AND_TRAIN" "${1}" "${2}" "${3}" "${4}"
+python3 "$NETLIST_GEN_AND_TRAIN" "${1}" "${2}" "${3}"
 
 # Check if the Python script executed successfully
 if [ $? -ne 0 ]; then

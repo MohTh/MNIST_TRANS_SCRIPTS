@@ -100,7 +100,7 @@ def gen_circuit(dk_config,path):
 
 
 
-def gen_netlist(path, number , input_netlist,CAP,dk_config):
+def gen_netlist(path, number,CAP,dk_config):
     current_path = os.getcwd()
     stim_path = current_path + "/stimul/"
     # Read values from file and assign to an array

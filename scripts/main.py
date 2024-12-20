@@ -22,7 +22,7 @@ import gen_netlist
 import configparser
 import re
 import gen_inputs
-#USAGE: python main.py <output_folder_path> <number_of_images>  <t/nt> <input netlist path>
+#USAGE: python main.py <output_folder_path> <number_of_images>  <t/nt>
 
 
 
@@ -45,9 +45,9 @@ def main(test, test2):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) !=5:
+    if len(sys.argv) !=4:
         print("Usage error")
-        print("Usage: python main.py <output_folder_path> <number_of_images>  <t/nt> <input netlist path>")
+        print("Usage: python main.py <output_folder_path> <number_of_images>  <t/nt>")
     else: 
         if not(os.path.exists('mnist_model.pth')):
             print("Model file not found")
@@ -62,7 +62,7 @@ if __name__ == "__main__":
             os.system(f"rm -r {sys.argv[1]}")
         gen_images.gen_images(sys.argv[1],int(sys.argv[2]))
         gen_inputs.gen_inputs("./stimul",sys.argv[1], int(sys.argv[2]),1000,float(cmpt_t),float(reset_t),float(trans_t))
-        gen_netlist.gen_netlist(sys.argv[1],int(sys.argv[2]),sys.argv[4],CAP,dk_config)
+        gen_netlist.gen_netlist(sys.argv[1],int(sys.argv[2]),CAP,dk_config)
 
         # Path to your text file
         file_path = f"{sys.argv[1]}/netlist"
