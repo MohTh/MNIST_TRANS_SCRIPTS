@@ -7,8 +7,7 @@
 simulator lang=spectre
 global 0
 parameters temperature=27
-include "/xtools/tsmc/tsmc_cern_65_1.7a/V1.7A_1/1p9m6x1z1u/tsmcN65/../models/spectre/toplevel.scs" section=tt_lib
-
+include "$TSMC_PDK/models/spectre/toplevel.scs" section=tt_lib
 // Library name: 1MOS_CAP
 // Cell name: Sink_10
 // View name: schematic
