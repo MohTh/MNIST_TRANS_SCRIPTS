@@ -77,7 +77,7 @@ def gen_circuit(dk_config,path):
         file.write("\n")
         
         #generate input column
-        for i in range(784):
+        for i in range(1000):
             file.write(transistor(pmos,f"Mi{i}","VD",f"INA\<{i}\>",f"INA\<{i}\>","VD"))
             file.write("\n")
             file.write(transistor(pmos,f"Mclr{i}","VD","CLR",f"INA\<{i}\>","VD"))
@@ -85,8 +85,8 @@ def gen_circuit(dk_config,path):
 
         #generate compute column
         for i in range(10):
-            for j in range(784):
-                file.write(f"Icell{j+i*784} (BL\<{i}\> INA\<{j}\> INB\<{j+i*784}\> INB2\<{i}\> OUTn\<{i}\> OUTp\<{i}\> VD Vbn Vbp WL\<{j}\> WLb\<{j}\> 0) _sub0")
+            for j in range(1000):
+                file.write(f"Icell{j+i*1000} (BL\<{i}\> INA\<{j}\> INB\<{j+i*1000}\> INB2\<{i}\> OUTn\<{i}\> OUTp\<{i}\> VD Vbn Vbp WL\<{j}\> WLb\<{j}\> 0) _sub0")
                 file.write("\n")
         
         #generate sink transistors
